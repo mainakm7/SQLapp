@@ -29,28 +29,29 @@ class newdata(BaseModel):
     priority: int = Field(ge=1, le=5)
     complete:bool
     
+#REST APIs for table: todos in the sqlmdb database
 
-@app.get("/", status_code=status.HTTP_200_OK)
+@app.get("/todos", status_code=status.HTTP_200_OK)
 def read_all(db: db_dependency):
     return db.query(sqlm).all()
 
-@app.get("/sqlm1/{data_id}", status_code=status.HTTP_200_OK)
-def read_todo(db: db_dependency, data_id: int = Path(gt=0)):
+@app.get("/todos/{data_id}", status_code=status.HTTP_200_OK)
+def read_todos(db: db_dependency, data_id: int = Path(gt=0)):
     data_model =  db.query(sqlm).filter(sqlm.id == data_id).first()
     if data_model:
         return data_model
     else:
         raise HTTPException(status_code=404, detail="Data not Found")
     
-@app.post("/sqlm1",status_code=status.HTTP_201_CREATED)
-def create_todo(db: db_dependency, newdata1: newdata):
+@app.post("/todos/new_todo",status_code=status.HTTP_201_CREATED)
+def create_todos(db: db_dependency, newdata1: newdata):
     data_model = sqlm(**newdata1.model_dump())
     
     db.add(data_model)
     db.commit()
     
-@app.put("/sqlm1/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
-def update_todo(db: db_dependency, data_id: int, newdata1: newdata):
+@app.put("/todos/update_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
+def update_todos(db: db_dependency, data_id: int, newdata1: newdata):
     data_model = db.query(sqlm).filter(sqlm.id == data_id).first()
     if not data_model:
         raise HTTPException(status_code=404, detail="Data not Found")
@@ -64,8 +65,8 @@ def update_todo(db: db_dependency, data_id: int, newdata1: newdata):
     db.commit()      
     
 
-@app.delete("/sqlm1/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
-def delete_todo(db: db_dependency, data_id: int = Path(gt=0)):
+@app.delete("/todos/delete_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
+def delete_todos(db: db_dependency, data_id: int = Path(gt=0)):
     data_model = db.query(sqlm).filter(sqlm.id == data_id).first()
     if not data_model:
         raise HTTPException(status_code=404, detail="Data not Found")
