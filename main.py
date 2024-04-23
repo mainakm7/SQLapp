@@ -33,6 +33,10 @@ class newdata(BaseModel):
     
 #REST APIs for table: todos in the sqlmdb database
 
+@app.get("/", status_code=status.HTTP_200_OK)
+def welcome_msg():
+    return {"Greet": "Welcome! This is your todo app."}
+
 @app.get("/todos", status_code=status.HTTP_200_OK)
 def read_all(db: db_dependency):
     return db.query(sqlm).all()
