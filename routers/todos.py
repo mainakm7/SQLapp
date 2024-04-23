@@ -4,7 +4,7 @@ from pydantic import Field, BaseModel
 from models import sqlm
 from database import SessionLocal
 from sqlalchemy.orm import Session
-from typing import Annotated
+from typing import Annotated, Optional
 
 
 router = APIRouter()
@@ -21,10 +21,20 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 class newdata(BaseModel):
-    title:str = Field(min_length=3)
-    description:str = Field(min_length=3, max_length=100)
-    priority: int = Field(ge=1, le=5)
-    complete:bool
+    title: Optional[str] = Field(None, min_length=3)
+    description: Optional[str] = Field(None, min_length=3, max_length=100)
+    priority: Optional[int] = Field(None, ge=1, le=5)
+    complete: Optional[bool] = Field(None)
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "title": "Job",
+                "description": "Details",
+                "priority": 5,
+                "complete": False
+            }
+        }
     
 #REST APIs for table: todos in the sqlmdb database
 
@@ -57,10 +67,14 @@ def update_todos(db: db_dependency, data_id: int, newdata1: newdata):
     if not data_model:
         raise HTTPException(status_code=404, detail="Data not Found")
     
-    data_model.title = newdata1.title
-    data_model.description = newdata1.description
-    data_model.priority = newdata1.priority
-    data_model.complete = newdata1.complete
+    if newdata1.title:
+        data_model.title = newdata1.title
+    if newdata1.description:
+        data_model.description = newdata1.description
+    if newdata1.priority:
+        data_model.priority = newdata1.priority
+    if newdata1.complete:
+        data_model.complete = newdata1.complete
     
     db.add(data_model)
     db.commit()      
