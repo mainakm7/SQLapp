@@ -1,5 +1,9 @@
-**Made a SQLite based app for database management**
+**Made an app to store to-do events - ToDoApp**
 
-Created a table of todo lists for daily operations in a sqlite database
+Uses SQL database to store the to-dos.
 
-Api for CRUD operations were generated using FastAPI
+Made an user authentication program.
+
+Details: User can make a profile, login and then store their todos in the app. The app can track the todos for each user. It can be modified by the user.
+
+REST Apis for CRUD operations were generated using FastAPI
