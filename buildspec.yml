@@ -15,6 +15,4 @@ phases:
       - echo Building the Docker image...
       - docker build -t todoapp:latest .
   
-artifacts:
-  files:
-    - imagedefinitions.json
+artifacts: {}
