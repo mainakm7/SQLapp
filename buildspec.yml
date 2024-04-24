@@ -15,4 +15,6 @@ phases:
       - echo Building the Docker image...
       - docker build -t todoapp:latest .
   
-artifacts: {}
+artifacts: 
+  files:
+    - "**/*"
