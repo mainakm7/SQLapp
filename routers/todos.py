@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from typing import Annotated, Optional
 
 
-router = APIRouter()
+router = APIRouter(prefix="/todos", tags=["todos"])
 
 
 def get_db():
@@ -38,15 +38,11 @@ class newdata(BaseModel):
     
 #REST APIs for table: todos in the sqlmdb database
 
-@router.get("/", status_code=status.HTTP_200_OK)
-def welcome_msg():
-    return {"Greet": "Welcome! This is your todo app."}
-
-@router.get("/todos", status_code=status.HTTP_200_OK)
+@router.get("/all", status_code=status.HTTP_200_OK)
 def read_all(db: db_dependency):
     return db.query(Todos).all()
 
-@router.get("/todos/{data_id}", status_code=status.HTTP_200_OK)
+@router.get("/{data_id}", status_code=status.HTTP_200_OK)
 def read_todos(db: db_dependency, data_id: int = Path(gt=0)):
     data_model =  db.query(Todos).filter(Todos.id == data_id).first()
     if data_model:
@@ -54,14 +50,14 @@ def read_todos(db: db_dependency, data_id: int = Path(gt=0)):
     else:
         raise HTTPException(status_code=404, detail="Data not Found")
     
-@router.post("/todos/new_todo",status_code=status.HTTP_201_CREATED)
+@router.post("/new_todo",status_code=status.HTTP_201_CREATED)
 def create_todos(db: db_dependency, newdata1: newdata):
     data_model = Todos(**newdata1.model_dump())
     
     db.add(data_model)
     db.commit()
     
-@router.put("/todos/update_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/update_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
 def update_todos(db: db_dependency, data_id: int, newdata1: newdata):
     data_model = db.query(Todos).filter(Todos.id == data_id).first()
     if not data_model:
@@ -80,7 +76,7 @@ def update_todos(db: db_dependency, data_id: int, newdata1: newdata):
     db.commit()      
     
 
-@router.delete("/todos/delete_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/delete_todo/{data_id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_todos(db: db_dependency, data_id: int = Path(gt=0)):
     data_model = db.query(Todos).filter(Todos.id == data_id).first()
     if not data_model:
