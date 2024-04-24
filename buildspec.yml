@@ -7,8 +7,8 @@ phases:
   pre_build:
     commands:
       - echo "Installing Docker..."
-      - apt update -y
-      - apt install -y docker.io
+      - apt-get update -y
+      - apt-get install -y docker.io
   build:
     commands:
       - echo Build started on `date`
