@@ -1,7 +1,4 @@
 #alembic
-alembic/
-/alembic*.py
-/alembic.ini
 /alembic/versions/*.py
 
 # Byte-compiled / optimized / DLL files
