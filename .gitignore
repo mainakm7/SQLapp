@@ -1,6 +1,6 @@
 #alembic
-
-
+alembic/
+/alembic*.py
 /alembic.ini
 /alembic/versions/*.py
 
