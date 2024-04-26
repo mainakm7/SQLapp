@@ -8,4 +8,6 @@ Details: User can make a profile, login and then store their todos in the app. T
 
 REST Apis for CRUD operations were generated using FastAPI
 
+For the database: SQLITE3 and MYSQL:5.6 were used.
+
 **If running with Docker: uvicorn server can start at the default address of 127.0.0.1:8000 and not localhost:8000. Check both**
