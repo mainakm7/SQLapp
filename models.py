@@ -24,5 +24,6 @@ class Users(Base):
     hashed_password = Column(String(200))
     is_active = Column(Boolean, default=True)
     role = Column(String(45))
+    phone_number = Column(String(20), unique=True)
     
     
