@@ -8,5 +8,7 @@ Details: User can make a profile, login and then store their todos in the app. T
 
 REST Apis for CRUD operations were generated using FastAPI
 
+Using relative module imports for pytest compatibility. Need to run app from root folder outside app package (e.g: root_folder/ToDolistApp)
+
 For the database: SQLITE3 and MYSQL:5.6 were used.
 

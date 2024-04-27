@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from database import SessionLocal
+from ..database import SessionLocal
 from starlette import status
-from models import Users
+from ..models import Users
 from pydantic import BaseModel
 from typing import Annotated
 from passlib.context import CryptContext
