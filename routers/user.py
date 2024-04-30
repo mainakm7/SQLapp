@@ -42,7 +42,7 @@ async def get_user(user: user_dependency, db: db_dependency):
     return db.query(Users).filter(Users.id == user.get("id")).first()
 
 
-@router.put("/update_password", status_code=status.HTTP_200_OK)
+@router.put("/update_password", status_code=status.HTTP_204_NO_CONTENT)
 async def update_password(passreq: userverification, user: user_dependency, db: db_dependency):
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User authentication failed")
@@ -60,7 +60,7 @@ async def update_password(passreq: userverification, user: user_dependency, db: 
     db.add(user_model)
     db.commit()
     
-@router.put("/update_info", status_code=status.HTTP_200_OK)
+@router.put("/update_info", status_code=status.HTTP_204_NO_CONTENT)
 async def update_info(newinforeq: usernewinfo, user: user_dependency, db: db_dependency):
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User authentication failed")
