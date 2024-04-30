@@ -27,6 +27,7 @@ To-do_list_app is a simple application designed to help users store and manage t
 ## Development
 - This application was developed using FastAPI for building REST APIs.
 - Pytest is used for testing, with relative module imports for compatibility.
+- Dockerfile and buildspec files (specific to AWS CodePipeline) were added for containerization and implementing CI/CD pipelines.
 - Contributions and feedback are welcome. Feel free to submit pull requests or raise issues on the GitHub repository.
 
 ## Contributors
