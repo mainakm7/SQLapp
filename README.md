@@ -1,4 +1,4 @@
-# ToDoApp
+# To-do_list_app
 
 ## Description
 To-do_list_app is a simple application designed to help users store and manage their to-do events. It utilizes a SQL database to store to-do items and incorporates user authentication features. Users can create a profile, log in securely, and then add, modify, or delete their to-do items within the app. The application provides REST APIs for performing CRUD (Create, Read, Update, Delete) operations on the to-do items, making it easy to integrate with other systems or extend its functionality.
