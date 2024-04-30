@@ -22,14 +22,14 @@ def test_read_user_info(test_user):
 
     
 def test_update_user_password(test_user):
-    pass_req = {"oldpassword":"test1234", "newpassword":"test12345"}
+    pass_req = {"oldpassword":"testpass", "newpassword":"testpassnew"}
     
     response = client.put("/user/update_password", json=pass_req)
     
     assert response.status_code == status.HTTP_204_NO_CONTENT
     
 def test_update_user_password_invalid_current_password(test_user):
-    pass_req = {"oldpassword":"test12345", "newpassword":"test123456"}
+    pass_req = {"oldpassword":"testpass1", "newpassword":"testpassnew"}
     
     response = client.put("/user/update_password", json=pass_req)
     

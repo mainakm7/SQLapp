@@ -58,7 +58,7 @@ def test_user():
         username = "mmtest",
         first_name = "mmtest1",
         last_name = "mmtest1",
-        hashed_password = bcrypt_context.hash("test1234"),
+        hashed_password = bcrypt_context.hash("testpass"),
         is_active = True,
         role = "admin",
         phone_number = "1111111111"
