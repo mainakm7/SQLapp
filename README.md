@@ -12,6 +12,7 @@ Todo_list_app is a simple application designed to help users store and manage th
 ## Installation
 1. Clone the repository: `https://github.com/mainakm7/Todo_list_app.git`
 2. Install dependencies: `pip install -r requirements.txt`
+3. Python version used = 3.11.5
 
 ## Usage
 1. Ensure you have SQLite3 and MySQL 5.6 installed and running on your system.
