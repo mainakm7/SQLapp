@@ -9,6 +9,7 @@ from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
 from datetime import timedelta, datetime
+import json
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -16,9 +17,12 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl="auth/token")
 
+
+with open(r".\secrets.json", "r") as f:
+    secrets = json.load(f)
 #Secret key generated with rand hex32
-SECRET_KEY = "bf16160f8eccf0935b9cebc86a0a0b04ddc868321cce8d65d163de2e137c008f"
-ALGORITHM = "HS256"
+SECRET_KEY = secrets.get("SECRET_KEY")
+ALGORITHM = secrets.get("ALGORITHM")
 
 def get_db():
     db = SessionLocal()
